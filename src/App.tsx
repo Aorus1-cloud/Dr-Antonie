@@ -591,7 +591,7 @@ const FAQ = () => {
             <div key={i} className="border-b border-black/10">
               <button 
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                data-ccursor
+                data-ccursor  
                 className="w-full py-6 flex items-center justify-between text-left group"
               >
                 <span className="text-lg font-bold uppercase tracking-widest group-hover:opacity-60 transition-opacity">{faq.q}</span>
@@ -925,7 +925,7 @@ const HygieneBanner = () => {
         <p className="text-lg opacity-70 leading-relaxed mb-10">
           Keeping your mouth clean is crucial to your general health. Frequent brushing, flossing, and expert cleanings help avoid the accumulation of plaque and tartar, which can cause cavities and gum disease.
         </p>
-        <button className="bg-white text-black px-10 py-5 text-sm uppercase tracking-widest font-bold hover:bg-zinc-200 transition-all">
+        <button className="bg-white text-black px-10 py-5 text-sm uppercase tracking-widest font-bold hover:bg-zinc-200 transition-all" data-ccursor>
           Learn More
         </button>
       </div>
