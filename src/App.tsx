@@ -5,15 +5,15 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
-import { 
-  Phone, 
-  Mail, 
-  MapPin, 
-  Menu, 
-  X, 
-  ChevronRight, 
-  Star, 
-  CheckCircle2, 
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Menu,
+  X,
+  ChevronRight,
+  Star,
+  CheckCircle2,
   Calendar,
   ArrowRight,
   Award,
@@ -59,21 +59,25 @@ const Navbar = () => {
       isScrolled ? "bg-white/80 backdrop-blur-md py-4 border-black/10" : "bg-transparent py-6 border-transparent"
     )}>
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="w-10 h-10 bg-black flex items-center justify-center rounded-sm">
-            <span className="text-white font-serif font-bold text-xl">H</span>
+        <a href="#" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+          <div className="bg-black px-4 py-2 rounded-sm">
+            <img
+              src="public/Dr-antonie-logo.webp"
+              alt="Dr. Antoine Habib"
+              className={cn(
+                "w-auto object-contain transition-all duration-500",
+                isScrolled ? "h-8" : "h-10"
+              )}
+            />
           </div>
-          <div className="flex flex-col">
-            <span className="font-serif font-bold text-lg leading-none tracking-tight">DR. ANTOINE</span>
-            <span className="text-[10px] uppercase tracking-[0.2em] opacity-60">Maxillofacial & Dental</span>
-          </div>
-        </div>
+        </a>
+
 
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <motion.a 
-              key={link.name} 
-              href={link.href}  
+            <motion.a
+              key={link.name}
+              href={link.href}
               whileHover={{ scale: 1.1, y: -2 }}
               whileTap={{ scale: 0.95 }}
               data-ccursor
@@ -89,18 +93,18 @@ const Navbar = () => {
             <span className="text-[10px] uppercase tracking-widest opacity-50" >Emergency Call</span>
             <a href="tel:+971566481481" data-ccursor className="text-sm font-bold">+971 56 648 1481</a>
           </div>
-            <motion.button 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-              data-ccursor="lift"
-              className="bg-black text-white px-8 py-3 text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-zinc-800 transition-colors rounded-full"
-            >
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+            data-ccursor="lift"
+            className="bg-black text-white px-8 py-3 text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-zinc-800 transition-colors rounded-full"
+          >
             Book Appointment
           </motion.button>
         </div>
 
         {/* Mobile Toggle */}
-        <button 
+        <button
           className="md:hidden"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
@@ -111,15 +115,15 @@ const Navbar = () => {
       {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             className="absolute top-full left-0 w-full bg-white border-b border-black/10 p-6 flex flex-col gap-4 md:hidden"
           >
             {navLinks.map((link) => (
-              <a 
-                key={link.name} 
+              <a
+                key={link.name}
                 href={link.href}
                 className="text-lg font-serif italic border-b border-black/5 pb-2"
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -186,7 +190,7 @@ const Hero = () => {
             Leading Maxillofacial Surgery and Dental Implant Clinic providing world-class care with advanced technology and artistic precision.
           </p>
           <div className="hero-sub flex flex-wrap gap-4">
-            <motion.button 
+            <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
               data-ccursor="lift"
@@ -194,7 +198,7 @@ const Hero = () => {
             >
               Book Appointment
             </motion.button>
-            <motion.button 
+            <motion.button
               whileHover={{ scale: 1.05, backgroundColor: "#000", color: "#fff" }}
               whileTap={{ scale: 0.98 }}
               data-ccursor="lift"
@@ -205,24 +209,24 @@ const Hero = () => {
           </div>
         </div>
         <div ref={imageRef} className="relative hero-image">
-          <div className="aspect-[4/5] bg-zinc-200 overflow-hidden rounded-sm shadow-2xl">
-            <img 
-              src="https://picsum.photos/seed/doctor/800/1000" 
-              alt="Dr. Antoine Habib" 
+          <div className="aspect-[4/5] bg-transparent overflow-hidden rounded-sm ">
+            <img
+              src="/dr-image.webp"
+              alt="Dr. Antoine Habib"
               className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
               referrerPolicy="no-referrer"
             />
           </div>
           <div className="absolute -bottom-12 -left-10 bg-white p-10 shadow-2xl hidden lg:block max-w-xs border border-black/5">
             <div className="flex gap-1 mb-4">
-              {[1,2,3,4,5].map(i => <Star key={i} size={16} fill="#facc15" className="text-yellow-400" />)}
+              {[1, 2, 3, 4, 5].map(i => <Star key={i} size={16} fill="#facc15" className="text-yellow-400" />)}
             </div>
             <p className="text-base italic font-serif text-zinc-900 leading-relaxed">"The best dental care experience I've ever had. Truly professional and caring."</p>
             <p className="text-xs uppercase tracking-[0.2em] mt-6 font-bold text-black">— Sarah Johnson</p>
           </div>
         </div>
       </div>
-      
+
       {/* Background Text */}
       <div className="absolute bottom-0 right-0 opacity-[0.03] select-none pointer-events-none translate-y-1/4">
         <span className="text-[25vw] font-serif font-bold leading-none">HABIB</span>
@@ -256,7 +260,7 @@ const About = () => {
       const targets = textContainerRef.current?.querySelectorAll(".reveal-text");
       if (targets && targets.length > 0) {
         const split = new SplitType(targets as any, { types: 'words' });
-        
+
         if (split.words) {
           split.words.forEach((word, i) => {
             gsap.from(word, {
@@ -300,9 +304,9 @@ const About = () => {
       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-20 items-center">
         <div className="about-img relative">
           <div className="aspect-square bg-zinc-100 rounded-sm overflow-hidden">
-            <img 
-              src="https://picsum.photos/seed/clinic/800/800" 
-              alt="Clinic" 
+            <img
+              src="https://picsum.photos/seed/clinic/800/800"
+              alt="Clinic"
               className="w-full h-full object-cover grayscale"
               referrerPolicy="no-referrer"
             />
@@ -325,7 +329,7 @@ const About = () => {
               Dr. Antoine holds multiple <span className="highlight-text font-bold text-black">international certifications</span> from European countries and has served as a <span className="highlight-text font-bold text-black">Key Opinion Leader</span> for BioHorizons. Currently, he is a professor at the University of Sharjah.
             </p>
           </div>
-          <motion.button 
+          <motion.button
             whileHover={{ y: -5 }}
             whileTap={{ scale: 0.98 }}
             data-ccursor
@@ -345,7 +349,7 @@ const Logos = () => {
 
   useEffect(() => {
     if (!marqueeRef.current) return;
-    
+
     const marquee = marqueeRef.current;
     const totalWidth = marquee.scrollWidth / 2;
 
@@ -360,7 +364,7 @@ const Logos = () => {
       animation.kill();
     };
   }, []);
-  
+
   return (
     <section className="py-24 border-y border-black/5 bg-transparent overflow-hidden">
       <div className="flex whitespace-nowrap grayscale hover:grayscale-0 transition-all duration-700" ref={marqueeRef}>
@@ -407,7 +411,7 @@ const WhyChooseUs = () => {
         </div>
         <div className="grid md:grid-cols-4 gap-8">
           {features.map((f, i) => (
-            <motion.div 
+            <motion.div
               key={i}
               whileHover={{ y: -10, scale: 1.02, boxShadow: "0 20px 40px -20px rgba(0,0,0,0.2)" }}
               data-ccursor="lift"
@@ -441,7 +445,7 @@ const Specialty = () => {
               Bone tissue is added during bone transplant treatment for dental implants to increase the volume and density of the jawbone. This is frequently required when the jawbone is not thick enough or strong enough to sustain a dental implant.
             </p>
           </div>
-          <motion.button 
+          <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             data-ccursor="lift"
@@ -451,11 +455,11 @@ const Specialty = () => {
           </motion.button>
         </div>
         <div className="grid grid-cols-2 gap-4">
-          {[1,2,3,4].map(i => (
+          {[1, 2, 3, 4].map(i => (
             <div key={i} className="aspect-square bg-zinc-800 rounded-sm overflow-hidden group">
-              <img 
-                src={`https://picsum.photos/seed/dental-${i}/600/600`} 
-                alt="Dental Specialty" 
+              <img
+                src={`https://picsum.photos/seed/dental-${i}/600/600`}
+                alt="Dental Specialty"
                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110"
                 referrerPolicy="no-referrer"
               />
@@ -527,14 +531,14 @@ const Achievements = () => {
         </div>
         <div className="order-1 md:order-2">
           <div className="aspect-video bg-zinc-200 rounded-sm overflow-hidden shadow-2xl relative">
-            <img 
-              src="https://picsum.photos/seed/awards/800/600" 
-              alt="Achievements" 
+            <img
+              src="https://picsum.photos/seed/awards/800/600"
+              alt="Achievements"
               className="w-full h-full object-cover grayscale"
               referrerPolicy="no-referrer"
             />
             <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-              <motion.button 
+              <motion.button
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}
                 data-ccursor="lift"
@@ -589,9 +593,9 @@ const FAQ = () => {
         <div className="space-y-4">
           {faqs.map((faq, i) => (
             <div key={i} className="border-b border-black/10">
-              <button 
+              <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                data-ccursor  
+                data-ccursor
                 className="w-full py-6 flex items-center justify-between text-left group"
               >
                 <span className="text-lg font-bold uppercase tracking-widest group-hover:opacity-60 transition-opacity">{faq.q}</span>
@@ -599,7 +603,7 @@ const FAQ = () => {
               </button>
               <AnimatePresence>
                 {openIndex === i && (
-                  <motion.div 
+                  <motion.div
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
@@ -624,9 +628,9 @@ const ContactForm = () => {
         <div>
           <h2 className="text-4xl font-serif mb-8">Book an appointment now</h2>
           <div className="aspect-square bg-zinc-200 rounded-sm overflow-hidden mb-8">
-            <img 
-              src="https://picsum.photos/seed/contact/800/800" 
-              alt="Contact" 
+            <img
+              src="https://picsum.photos/seed/contact/800/800"
+              alt="Contact"
               className="w-full h-full object-cover grayscale"
               referrerPolicy="no-referrer"
             />
@@ -679,7 +683,7 @@ const ContactForm = () => {
               <label className="text-[10px] uppercase tracking-widest font-bold">Message</label>
               <textarea rows={4} className="w-full border-b border-black/20 py-2 focus:border-black outline-none transition-colors resize-none"></textarea>
             </div>
-            <motion.button 
+            <motion.button
               whileHover={{ scale: 1.02, backgroundColor: "#000", color: "#fff" }}
               whileTap={{ scale: 0.98 }}
               data-ccursor="lift"
@@ -699,15 +703,18 @@ const Footer = () => {
     <footer className="bg-black text-white py-20">
       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12 border-b border-white/10 pb-20">
         <div className="col-span-2">
-          <div className="flex items-center gap-2 mb-8">
-            <div className="w-10 h-10 bg-white flex items-center justify-center rounded-sm">
-              <span className="text-black font-serif font-bold text-xl">H</span>
-            </div>
-            <div className="flex flex-col">
+          <div className="flex items-center gap-3 mb-8">
+            <img
+              src="public/Dr-antonie-logo.webp"
+              alt="Dr. Antoine Logo"
+              className="h-12 w-auto object-contain brightness-0 invert"
+            />
+            {/* <div className="flex flex-col">
               <span className="font-serif font-bold text-lg leading-none tracking-tight">DR. ANTOINE</span>
               <span className="text-[10px] uppercase tracking-[0.2em] opacity-60">Maxillofacial & Dental</span>
-            </div>
+            </div> */}
           </div>
+
           <p className="max-w-sm opacity-50 text-sm leading-relaxed">
             Providing premium maxillofacial surgery and dental implant services with a focus on patient comfort and clinical excellence.
           </p>
@@ -759,7 +766,7 @@ const Loader = ({ onComplete }: { onComplete: () => void }) => {
   }, [onComplete]);
 
   return (
-    <motion.div 
+    <motion.div
       exit={{ y: "-100%" }}
       transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
       className="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center text-white"
@@ -770,7 +777,7 @@ const Loader = ({ onComplete }: { onComplete: () => void }) => {
           <span className="font-mono text-sm opacity-50">{progress}%</span>
         </div>
         <div className="h-[1px] w-full bg-white/10 overflow-hidden">
-          <motion.div 
+          <motion.div
             className="h-full bg-white"
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
@@ -809,8 +816,8 @@ const AppointmentSteps = () => {
         </div>
         <div className="grid md:grid-cols-3 gap-8">
           {steps.map((step, i) => (
-            <motion.div 
-              key={i} 
+            <motion.div
+              key={i}
               whileHover={{ y: -10, scale: 1.02 }}
               data-ccursor="lift"
               className="p-10 border border-black/5 bg-zinc-50 relative group overflow-hidden"
@@ -821,7 +828,7 @@ const AppointmentSteps = () => {
               </div>
               <h3 className="text-lg font-bold mb-4 uppercase tracking-widest">{step.title}</h3>
               <p className="text-sm text-zinc-500 leading-relaxed">{step.desc}</p>
-              <div className="mt-8 text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Step 0{i+1}</div>
+              <div className="mt-8 text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Step 0{i + 1}</div>
             </motion.div>
           ))}
         </div>
@@ -847,9 +854,9 @@ const Testimonials = () => {
         <div className="grid md:grid-cols-3 gap-8">
           {testimonials.map((t, i) => (
             <div key={i} className="aspect-[3/4] bg-zinc-100 rounded-sm overflow-hidden relative group">
-              <img 
-                src={t.video} 
-                alt={t.name} 
+              <img
+                src={t.video}
+                alt={t.name}
                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
                 referrerPolicy="no-referrer"
               />
@@ -881,7 +888,7 @@ const GoogleReviews = () => {
           <div className="flex items-center gap-2">
             <span className="font-bold">4.9</span>
             <div className="flex gap-1">
-              {[1,2,3,4,5].map(i => <Star key={i} size={14} fill="black" />)}
+              {[1, 2, 3, 4, 5].map(i => <Star key={i} size={14} fill="black" />)}
             </div>
           </div>
         </div>
@@ -898,7 +905,7 @@ const GoogleReviews = () => {
                 </div>
               </div>
               <div className="flex gap-1 mb-4">
-                {[1,2,3,4,5].map(i => <Star key={i} size={10} fill="black" />)}
+                {[1, 2, 3, 4, 5].map(i => <Star key={i} size={10} fill="black" />)}
               </div>
               <p className="text-sm text-zinc-500 leading-relaxed italic">"{r.text}"</p>
             </div>
@@ -913,9 +920,9 @@ const HygieneBanner = () => {
   return (
     <section className="relative py-32 overflow-hidden bg-black text-white">
       <div className="absolute inset-0 opacity-30">
-        <img 
-          src="https://picsum.photos/seed/hygiene/1920/1080" 
-          alt="Hygiene" 
+        <img
+          src="https://picsum.photos/seed/hygiene/1920/1080"
+          alt="Hygiene"
           className="w-full h-full object-cover grayscale"
           referrerPolicy="no-referrer"
         />
@@ -980,19 +987,19 @@ export default function App() {
 
   return (
     <div className="relative selection:bg-black selection:text-white">
-    <ContextCursor 
-      radius={24}              // Default is 20 - make bigger/smaller
-      transitionSpeed={0.3}    // Default is 0.2 - slower = smoother, faster = snappier
-      parallaxIndex={12}       // Default is 10 - higher = less parallax movement
-      hoverPadding={8}         // Default is 6 - space around elements when hovering
-    />
+      <ContextCursor
+        radius={24}              // Default is 20 - make bigger/smaller
+        transitionSpeed={0.3}    // Default is 0.2 - slower = smoother, faster = snappier
+        parallaxIndex={12}       // Default is 10 - higher = less parallax movement
+        hoverPadding={8}         // Default is 6 - space around elements when hovering
+      />
       <div className="bg-mesh" />
       <div className="bg-noise" />
-      
+
       {/* Floating Abstract Elements */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0 opacity-10">
-        <motion.div 
-          animate={{ 
+        <motion.div
+          animate={{
             y: [0, -40, 0],
             rotate: [0, 10, 0],
             scale: [1, 1.1, 1]
@@ -1000,8 +1007,8 @@ export default function App() {
           transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
           className="absolute top-[15%] left-[10%] w-[40vw] h-[40vw] border border-black/5 rounded-full blur-3xl"
         />
-        <motion.div 
-          animate={{ 
+        <motion.div
+          animate={{
             y: [0, 60, 0],
             rotate: [0, -15, 0],
             scale: [1, 1.2, 1]
