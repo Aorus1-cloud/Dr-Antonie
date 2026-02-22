@@ -66,9 +66,10 @@ export function useContextCursor(props: ContextCursorProps = {}) {
         if (!target) return;
 
         const rect = target.getBoundingClientRect();
-        const borderRadius = parseFloat(
-          window.getComputedStyle(target).borderRadius
-        ) || 0;
+
+        // Extract border radius as number (remove 'px' unit)
+        const borderRadiusStr = window.getComputedStyle(target).borderRadius;
+        const borderRadius = Number(borderRadiusStr.slice(0, -2)) || 0;
 
         if (elHasMode(target, "lift")) {
           // LIFT mode — float the target, blur the cursor
@@ -82,15 +83,14 @@ export function useContextCursor(props: ContextCursorProps = {}) {
           gsap.to(cursor, {
             duration: transitionSpeed,
             filter: "blur(8px)",
+            borderRadius: borderRadius,  // Apply the same border radius to cursor
             x:
               rect.left +
               (e.clientX - rect.left - target.clientWidth / 2) / parallaxCursor,
             y:
               rect.top +
               (e.clientY - rect.top - target.clientHeight / 2) / parallaxCursor,
-            // backgroundImage: `radial-gradient(circle at ${
-            //   e.clientX - rect.left
-            // }px ${e.clientY - rect.top}px, rgba(255,255,255,0.4), rgba(255,255,255,0))`,
+            // Removed glare effect
           });
         } else {
           // DEFAULT (parallax / snap) mode
@@ -106,14 +106,15 @@ export function useContextCursor(props: ContextCursorProps = {}) {
               (noPar
                 ? 0
                 : (e.clientX - rect.left - target.clientWidth / 2) /
-                  parallaxCursor),
+                parallaxCursor),
             y:
               rect.top -
               pad +
               (noPar
                 ? 0
                 : (e.clientY - rect.top - target.clientHeight / 2) /
-                  parallaxCursor),
+                parallaxCursor),
+            // Multiply border radius by 1.5 when adding padding (original behavior)
             borderRadius: borderRadius * (noPad ? 1 : 1.5),
             width: target.clientWidth + pad * 2,
             height: target.clientHeight + pad * 2,
@@ -137,27 +138,34 @@ export function useContextCursor(props: ContextCursorProps = {}) {
     (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const cursor = cursorRef.current;
-      
-      // Find the closest element with data-ccursor attribute
+
       const interactive = target.closest(`[${DATA_ATTR}]`) as HTMLElement;
-      
+
       if (!cursor || !interactive) return;
 
       isHovered.current = true;
       cursorTarget.current = interactive;
 
-      const borderRadius =
-        parseFloat(window.getComputedStyle(interactive).borderRadius) || 0;
+      // DEBUG: Log what we're reading
+      const computedStyle = window.getComputedStyle(interactive);
+      const borderRadiusStr = computedStyle.borderRadius;
+      console.log('Element:', interactive);
+      console.log('Border radius string:', borderRadiusStr);
+      console.log('Classes:', interactive.className);
+
+      const borderRadius = Number(borderRadiusStr.slice(0, -2)) || 0;
+      console.log('Border radius number:', borderRadius);
 
       if (elHasMode(interactive, "lift")) {
         cursor.classList.add("c-cursor-lift_active");
         gsap.to(cursor, {
           duration: transitionSpeed,
-          borderRadius,
+          borderRadius: borderRadius,
           width: interactive.clientWidth,
           height: interactive.clientHeight,
           scale: 1.1,
         });
+        console.log('Applied to cursor:', borderRadius);
       } else {
         cursor.classList.add("c-cursor_active");
       }
@@ -170,10 +178,9 @@ export function useContextCursor(props: ContextCursorProps = {}) {
     (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const cursor = cursorRef.current;
-      
-      // Find the closest element with data-ccursor attribute
+
       const interactive = target.closest(`[${DATA_ATTR}]`) as HTMLElement;
-      
+
       if (!cursor || !interactive) return;
 
       isHovered.current = false;
@@ -235,8 +242,6 @@ export function useContextCursor(props: ContextCursorProps = {}) {
 
   // ---- Attach / detach global listeners ----
   useEffect(() => {
-    // Use event delegation on document for mouseover/mouseout
-    // This works with dynamically rendered React elements
     document.addEventListener("mousemove", moveCursor);
     document.addEventListener("wheel", handleScroll, { passive: true });
     document.addEventListener("mouseover", handleMouseOver);

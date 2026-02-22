@@ -73,11 +73,11 @@ const Navbar = () => {
           {navLinks.map((link) => (
             <motion.a 
               key={link.name} 
-              href={link.href}
+              href={link.href}  
               whileHover={{ scale: 1.1, y: -2 }}
               whileTap={{ scale: 0.95 }}
               data-ccursor
-              className="text-sm font-medium hover:opacity-50 transition-opacity uppercase tracking-widest"
+              className="text-sm font-medium hover:opacity-50 transition-opacity uppercase tracking-widest rounded-full"
             >
               {link.name}
             </motion.a>
