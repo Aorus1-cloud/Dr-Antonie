@@ -28,7 +28,8 @@ function getStyleProp(name: string): string {
 }
 
 function elHasMode(el: HTMLElement, mode: string): boolean {
-  const val = el.getAttribute(DATA_ATTR) || "";
+  const val = el.getAttribute(DATA_ATTR);
+  if (!val) return false;
   return val.split(" ").includes(mode);
 }
 
@@ -131,24 +132,30 @@ export function useContextCursor(props: ContextCursorProps = {}) {
     [radius, transitionSpeed, parallaxCursor, parallaxTarget, hoverPadding]
   );
 
-  // ---- Mouse enter / leave on interactive elements ----
-  const handleMouseEnter = useCallback(
+  // ---- Mouse over handler (uses event delegation) ----
+  const handleMouseOver = useCallback(
     (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
       const cursor = cursorRef.current;
-      if (!cursor) return;
-      isHovered.current = true;
-      cursorTarget.current = e.currentTarget as HTMLElement;
-      const target = cursorTarget.current;
-      const borderRadius =
-        parseFloat(window.getComputedStyle(target).borderRadius) || 0;
+      
+      // Find the closest element with data-ccursor attribute
+      const interactive = target.closest(`[${DATA_ATTR}]`) as HTMLElement;
+      
+      if (!cursor || !interactive) return;
 
-      if (elHasMode(target, "lift")) {
+      isHovered.current = true;
+      cursorTarget.current = interactive;
+
+      const borderRadius =
+        parseFloat(window.getComputedStyle(interactive).borderRadius) || 0;
+
+      if (elHasMode(interactive, "lift")) {
         cursor.classList.add("c-cursor-lift_active");
         gsap.to(cursor, {
           duration: transitionSpeed,
           borderRadius,
-          width: target.clientWidth,
-          height: target.clientHeight,
+          width: interactive.clientWidth,
+          height: interactive.clientHeight,
           scale: 1.1,
         });
       } else {
@@ -158,10 +165,17 @@ export function useContextCursor(props: ContextCursorProps = {}) {
     [transitionSpeed]
   );
 
-  const handleMouseLeave = useCallback(
+  // ---- Mouse out handler ----
+  const handleMouseOut = useCallback(
     (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
       const cursor = cursorRef.current;
-      if (!cursor) return;
+      
+      // Find the closest element with data-ccursor attribute
+      const interactive = target.closest(`[${DATA_ATTR}]`) as HTMLElement;
+      
+      if (!cursor || !interactive) return;
+
       isHovered.current = false;
       cursor.classList.remove("c-cursor_active", "c-cursor-lift_active");
 
@@ -191,34 +205,50 @@ export function useContextCursor(props: ContextCursorProps = {}) {
   );
 
   // ---- Scroll handler — reset cursor ----
-  const handleScroll = useCallback(
-    (e: Event) => {
-      handleMouseLeave(e as unknown as MouseEvent);
-    },
-    [handleMouseLeave]
-  );
+  const handleScroll = useCallback(() => {
+    const cursor = cursorRef.current;
+    if (!cursor) return;
+
+    isHovered.current = false;
+    cursor.classList.remove("c-cursor_active", "c-cursor-lift_active");
+
+    gsap.to(cursor, {
+      duration: transitionSpeed,
+      width: radius,
+      height: radius,
+      borderRadius: "100px",
+      scale: 1,
+      backgroundImage: "none",
+      filter: "blur(0px)",
+    });
+
+    if (cursorTarget.current) {
+      gsap.to(cursorTarget.current, {
+        duration: transitionSpeed,
+        x: 0,
+        y: 0,
+        scale: 1,
+        boxShadow: "0 7px 15px rgba(0,0,0,0.0)",
+      });
+    }
+  }, [radius, transitionSpeed]);
 
   // ---- Attach / detach global listeners ----
   useEffect(() => {
+    // Use event delegation on document for mouseover/mouseout
+    // This works with dynamically rendered React elements
     document.addEventListener("mousemove", moveCursor);
     document.addEventListener("wheel", handleScroll, { passive: true });
-
-    // Bind interactive elements
-    const elements = document.querySelectorAll<HTMLElement>(`[${DATA_ATTR}]`);
-    elements.forEach((el) => {
-      el.addEventListener("mouseenter", handleMouseEnter as EventListener);
-      el.addEventListener("mouseleave", handleMouseLeave as EventListener);
-    });
+    document.addEventListener("mouseover", handleMouseOver);
+    document.addEventListener("mouseout", handleMouseOut);
 
     return () => {
       document.removeEventListener("mousemove", moveCursor);
       document.removeEventListener("wheel", handleScroll);
-      elements.forEach((el) => {
-        el.removeEventListener("mouseenter", handleMouseEnter as EventListener);
-        el.removeEventListener("mouseleave", handleMouseLeave as EventListener);
-      });
+      document.removeEventListener("mouseover", handleMouseOver);
+      document.removeEventListener("mouseout", handleMouseOut);
     };
-  }, [moveCursor, handleMouseEnter, handleMouseLeave, handleScroll]);
+  }, [moveCursor, handleMouseOver, handleMouseOut, handleScroll]);
 
   return cursorRef;
 }

@@ -86,7 +86,7 @@ const Navbar = () => {
 
         <div className="hidden md:flex items-center gap-6">
           <div className="flex flex-col items-end">
-            <span className="text-[10px] uppercase tracking-widest opacity-50">Emergency Call</span>
+            <span className="text-[10px] uppercase tracking-widest opacity-50" >Emergency Call</span>
             <a href="tel:+971566481481" data-ccursor className="text-sm font-bold">+971 56 648 1481</a>
           </div>
             <motion.button 
@@ -980,7 +980,12 @@ export default function App() {
 
   return (
     <div className="relative selection:bg-black selection:text-white">
-      <ContextCursor />
+    <ContextCursor 
+      radius={24}              // Default is 20 - make bigger/smaller
+      transitionSpeed={0.3}    // Default is 0.2 - slower = smoother, faster = snappier
+      parallaxIndex={12}       // Default is 10 - higher = less parallax movement
+      hoverPadding={8}         // Default is 6 - space around elements when hovering
+    />
       <div className="bg-mesh" />
       <div className="bg-noise" />
       
