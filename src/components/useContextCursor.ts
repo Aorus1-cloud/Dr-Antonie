@@ -88,9 +88,9 @@ export function useContextCursor(props: ContextCursorProps = {}) {
             y:
               rect.top +
               (e.clientY - rect.top - target.clientHeight / 2) / parallaxCursor,
-            backgroundImage: `radial-gradient(circle at ${
-              e.clientX - rect.left
-            }px ${e.clientY - rect.top}px, rgba(255,255,255,0.4), rgba(255,255,255,0))`,
+            // backgroundImage: `radial-gradient(circle at ${
+            //   e.clientX - rect.left
+            // }px ${e.clientY - rect.top}px, rgba(255,255,255,0.4), rgba(255,255,255,0))`,
           });
         } else {
           // DEFAULT (parallax / snap) mode

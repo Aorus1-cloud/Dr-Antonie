@@ -93,7 +93,7 @@ const Navbar = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
               data-ccursor="lift"
-              className="bg-black text-white px-8 py-3 text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-zinc-800 transition-colors rounded-none"
+              className="bg-black text-white px-8 py-3 text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-zinc-800 transition-colors rounded-full"
             >
             Book Appointment
           </motion.button>
@@ -190,7 +190,7 @@ const Hero = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
               data-ccursor="lift"
-              className="bg-black text-white px-10 py-5 text-xs uppercase tracking-[0.2em] font-bold hover:bg-zinc-800 transition-all rounded-none"
+              className="bg-black text-white px-10 py-5 text-xs uppercase tracking-[0.2em] font-bold hover:bg-zinc-800 transition-all rounded-2x1"
             >
               Book Appointment
             </motion.button>
@@ -683,7 +683,7 @@ const ContactForm = () => {
               whileHover={{ scale: 1.02, backgroundColor: "#000", color: "#fff" }}
               whileTap={{ scale: 0.98 }}
               data-ccursor="lift"
-              className="w-full bg-black text-white py-5 text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-zinc-800 transition-all rounded-none"
+              className="w-full bg-black text-white py-5 text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-zinc-800 transition-all rounded-x1"
             >
               Send Message
             </motion.button>
