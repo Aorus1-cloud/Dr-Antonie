@@ -46,7 +46,6 @@ import 'swiper/css/effect-fade';
 gsap.registerPlugin(ScrollTrigger);
 
 // --- Components ---
-
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -66,25 +65,33 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={cn(
-      "fixed top-0 left-0 w-full z-50 transition-all duration-500 border-b",
-      isScrolled ? "bg-white/80 backdrop-blur-md py-4 border-black/10" : "bg-transparent py-6 border-transparent"
-    )}>
+    <nav
+      className={cn(
+        'fixed top-0 left-0 w-full z-50 transition-all duration-500 border-b',
+        isScrolled
+          ? 'bg-white/80 backdrop-blur-md py-4 border-black/10'
+          : 'bg-transparent py-6 border-transparent'
+      )}
+    >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+        {/* Logo */}
+        <a
+          href="#"
+          className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+        >
           <div className="bg-black px-4 py-2 rounded-sm">
             <img
               src="public/Dr-antonie-logo.webp"
               alt="Dr. Antoine Habib"
               className={cn(
-                "w-auto object-contain transition-all duration-500",
-                isScrolled ? "h-8" : "h-10"
+                'w-auto object-contain transition-all duration-500',
+                isScrolled ? 'h-8' : 'h-10'
               )}
             />
           </div>
         </a>
 
-
+        {/* Desktop Navigation Links */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <motion.a
@@ -93,17 +100,22 @@ const Navbar = () => {
               whileHover={{ scale: 1.1, y: -2 }}
               whileTap={{ scale: 0.95 }}
               data-ccursor
-              className="text-sm font-medium hover:opacity-50 transition-opacity uppercase tracking-widest rounded-full"
+              className="text-sm font-medium hover:opacity-50 transition-opacity uppercase tracking-widest"
             >
               {link.name}
             </motion.a>
           ))}
         </div>
 
+        {/* Desktop CTA Section */}
         <div className="hidden md:flex items-center gap-6">
           <div className="flex flex-col items-end">
-            <span className="text-[10px] uppercase tracking-widest opacity-50" >Emergency Call</span>
-            <a href="tel:+971566481481" data-ccursor className="text-sm font-bold">+971 56 648 1481</a>
+            <span className="text-[10px] uppercase tracking-widest opacity-50">
+              Emergency Call
+            </span>
+            <a href="tel:+971566481481" data-ccursor className="text-sm font-bold">
+              +971 56 648 1481
+            </a>
           </div>
           <motion.button
             whileHover={{ scale: 1.05 }}
@@ -117,10 +129,11 @@ const Navbar = () => {
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden"
+          className="md:hidden flex items-center justify-center"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle menu"
         >
-          {isMobileMenuOpen ? <X /> : <Menu />}
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
@@ -131,19 +144,22 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 w-full bg-white border-b border-black/10 p-6 flex flex-col gap-4 md:hidden"
+            className="absolute top-full left-0 w-full bg-white border-b border-black/10 p-6 flex flex-col gap-4 md:hidden shadow-lg"
           >
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="text-lg font-serif italic border-b border-black/5 pb-2"
+                className="text-lg font-semibold border-b border-black/5 pb-3 hover:opacity-60 transition-opacity"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.name}
               </a>
             ))}
-            <button className="bg-black text-white w-full py-4 text-sm uppercase tracking-widest font-bold mt-4">
+            <button
+              className="bg-black text-white w-full py-4 text-sm uppercase tracking-widest font-bold mt-4 rounded-lg"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
               Book Appointment
             </button>
           </motion.div>
@@ -1407,11 +1423,11 @@ const Footer = () => {
             className="text-center"
           >
             <h2 className="text-[12vw] md:text-[10vw] lg:text-[8vw] font-bold leading-[0.9] tracking-tighter select-none">
-              Dr. Antoine
+              Dr. Antoine Habib
             </h2>
-            <h2 className="text-[12vw] md:text-[10vw] lg:text-[8vw] font-bold leading-[0.9] tracking-tighter select-none">
+            {/* <h2 className="text-[12vw] md:text-[10vw] lg:text-[8vw] font-bold leading-[0.9] tracking-tighter select-none">
               Habib
-            </h2>
+            </h2> */}
           </motion.div>
 
           {/* Contact Text on Hover */}
@@ -1424,7 +1440,7 @@ const Footer = () => {
             className="absolute inset-0 flex items-center justify-center"
           >
             <h2 className="text-[12vw] md:text-[10vw] lg:text-[8vw] font-bold leading-none tracking-tighter">
-              Contact
+              Chat Now
             </h2>
           </motion.div>
         </motion.a>

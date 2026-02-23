@@ -321,7 +321,7 @@ textarea:focus {
   }
 }
 /* ============================================
-   NAVBAR RESPONSIVE FIXES
+   NAVBAR RESPONSIVE FIXES - CORRECTED
    ============================================ */
 
 /* Base navbar styling */
@@ -333,11 +333,17 @@ nav {
   z-index: 50;
 }
 
-/* Navbar container */
+/* Navbar container - CRITICAL FIX */
 nav > div {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
+}
+
+/* Logo container */
+nav > div > a {
+  flex-shrink: 0;
 }
 
 /* Mobile specific fixes (< 768px) */
@@ -349,22 +355,30 @@ nav > div {
   
   /* Show mobile menu button */
   nav button.md\:hidden {
-    display: block !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
   }
 
   /* Navbar padding adjustment */
   nav {
-    /* display: flex; */
-    /* justify-content:end; */
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+  }
 
-    
-    padding-top: 1rem !important;
-    padding-bottom: 1rem !important;
+  /* Container padding on mobile */
+  nav > div {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
   }
 
   /* Logo sizing */
   nav img {
     height: 2rem !important;
+    width: auto !important;
   }
 
   nav > div > a > div {
@@ -400,10 +414,10 @@ nav > div {
     border-radius: 0.5rem;
   }
 
-  /* Ensure proper z-index hierarchy */
-  nav button[class*="md:hidden"] {
-    z-index: 51;
-    position: relative;
+  /* Hamburger icon sizing */
+  nav button.md\:hidden svg {
+    width: 24px;
+    height: 24px;
   }
 }
 
@@ -411,30 +425,42 @@ nav > div {
 @media (min-width: 768px) and (max-width: 1024px) {
   /* Reduce spacing between nav items */
   nav .hidden.md\:flex.items-center.gap-8 {
-    gap: 1.5rem !important;
-  }
-
-  nav .hidden.md\:flex.items-center.gap-6 {
     gap: 1rem !important;
   }
 
+  nav .hidden.md\:flex.items-center.gap-6 {
+    gap: 0.75rem !important;
+  }
+
   /* Smaller text on tablet */
-  nav a {
-    font-size: 0.75rem !important;
+  nav .hidden.md\:flex a {
+    font-size: 0.65rem !important;
   }
 
   /* Smaller button on tablet */
-  nav button {
-    padding-left: 1.5rem !important;
-    padding-right: 1.5rem !important;
-    padding-top: 0.625rem !important;
-    padding-bottom: 0.625rem !important;
-    font-size: 0.625rem !important;
+  nav .hidden.md\:flex button {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+    font-size: 0.5rem !important;
+  }
+
+  /* Emergency call text smaller */
+  nav .hidden.md\:flex .flex-col span,
+  nav .hidden.md\:flex .flex-col a {
+    font-size: 0.65rem !important;
   }
 
   /* Smaller logo on tablet */
   nav img {
-    height: 2.25rem !important;
+    height: 2rem !important;
+  }
+
+  /* Container padding on tablet */
+  nav > div {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
   }
 }
 
@@ -467,11 +493,6 @@ nav > div {
       transform: translateY(0);
     }
   }
-}
-
-/* Prevent body scroll when mobile menu is open */
-body.menu-open {
-  overflow: hidden;
 }
 
 /* Touch target size for mobile */
