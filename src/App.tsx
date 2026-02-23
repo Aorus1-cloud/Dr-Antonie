@@ -1355,9 +1355,12 @@ const ContactForm = () => {
 };
 
 const Footer = () => {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
-    <footer className="bg-black text-white py-20">
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12 border-b border-white/10 pb-20">
+    <footer className="bg-black text-white relative overflow-hidden">
+      {/* Original Footer Content - Top */}
+      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12 border-b border-white/10 pt-20 pb-20">
         <div className="col-span-2">
           <div className="flex items-center gap-3 mb-8">
             <img
@@ -1371,6 +1374,7 @@ const Footer = () => {
             Providing premium maxillofacial surgery and dental implant services with a focus on patient comfort and clinical excellence.
           </p>
         </div>
+        
         <div>
           <h4 className="text-xs uppercase tracking-widest font-bold mb-8">Quick Links</h4>
           <ul className="space-y-4 opacity-50 text-sm">
@@ -1381,12 +1385,58 @@ const Footer = () => {
           </ul>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto px-6 pt-10 flex flex-col md:flex-row justify-between items-center gap-6 opacity-90 text-[10px] uppercase tracking-[0.3em]">
+
+      {/* Large Brand Name - Interactive (Below Links) */}
+      <div className="relative py-32 px-6">
+        <motion.a
+          href="#contact"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          className="block cursor-pointer relative"
+          data-ccursor="lift"
+          whileHover={{ scale: 1.02 }}
+          transition={{ duration: 0.4 }}
+        >
+          {/* Default Text - Dr Antoine Habib */}
+          <motion.div
+            animate={{ 
+              opacity: isHovered ? 0 : 1,
+              scale: isHovered ? 0.95 : 1 
+            }}
+            transition={{ duration: 0.4 }}
+            className="text-center"
+          >
+            <h2 className="text-[12vw] md:text-[10vw] lg:text-[8vw] font-bold leading-[0.9] tracking-tighter select-none">
+              Dr. Antoine
+            </h2>
+            <h2 className="text-[12vw] md:text-[10vw] lg:text-[8vw] font-bold leading-[0.9] tracking-tighter select-none">
+              Habib
+            </h2>
+          </motion.div>
+
+          {/* Contact Text on Hover */}
+          <motion.div
+            animate={{ 
+              opacity: isHovered ? 1 : 0,
+              scale: isHovered ? 1 : 0.95 
+            }}
+            transition={{ duration: 0.4 }}
+            className="absolute inset-0 flex items-center justify-center"
+          >
+            <h2 className="text-[12vw] md:text-[10vw] lg:text-[8vw] font-bold leading-none tracking-tighter">
+              Contact
+            </h2>
+          </motion.div>
+        </motion.a>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="max-w-7xl mx-auto px-6 pb-10 flex flex-col md:flex-row justify-between items-center gap-6 opacity-30 text-[10px] uppercase tracking-[0.3em] border-t border-white/10 pt-6">
         <motion.a 
           href="https://maximyzmedia.com/" 
           target="_blank" 
           rel="noopener noreferrer"
-          whileHover={{ y: -2 }}
+          whileHover={{ y: -2, opacity: 1 }}
           data-ccursor 
           className="interactive hover:opacity-100 transition-opacity"
         >
@@ -1400,7 +1450,6 @@ const Footer = () => {
     </footer>
   );
 };
-
 
 const Loader = ({ onComplete }: { onComplete: () => void }) => {
   const [progress, setProgress] = useState(0);
