@@ -256,8 +256,8 @@ const Hero = () => {
       </div>
 
       {/* Background Text */}
-      <div className="absolute bottom-0 right-0 opacity-[0.03] select-none pointer-events-none translate-y-1/4">
-        <span className="text-[25vw] font-serif font-bold leading-none">HABIB</span>
+      <div className="absolute bottom-0 right-0 opacity-[0.03] select-none pointer-events-none translate-y-1/4 overflow-hidden">
+        <span className="text-[20vw] md:text-[25vw] font-serif font-bold leading-none">HABIB</span>
       </div>
     </section>
   );
@@ -1369,7 +1369,6 @@ const ContactForm = () => {
     </section>
   );
 };
-
 const Footer = () => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -1380,7 +1379,7 @@ const Footer = () => {
         <div className="col-span-2">
           <div className="flex items-center gap-3 mb-8">
             <img
-              src="/Dr-antonie-logo.webp"
+              src="public/Dr-antonie-logo.webp"
               alt="Dr. Antoine Logo"
               className="h-12 w-auto object-contain brightness-0 invert"
             />
@@ -1394,21 +1393,57 @@ const Footer = () => {
         <div>
           <h4 className="text-xs uppercase tracking-widest font-bold mb-8">Quick Links</h4>
           <ul className="space-y-4 opacity-50 text-sm">
-            <li><motion.a whileHover={{ x: 5 }} href="#" data-ccursor className="hover:opacity-100 transition-opacity interactive inline-block">Home</motion.a></li>
-            <li><motion.a whileHover={{ x: 5 }} href="#services" data-ccursor className="hover:opacity-100 transition-opacity interactive inline-block">Services</motion.a></li>
-            <li><motion.a whileHover={{ x: 5 }} href="#about" data-ccursor className="hover:opacity-100 transition-opacity interactive inline-block">About</motion.a></li>
-            <li><motion.a whileHover={{ x: 5 }} href="#contact" data-ccursor className="hover:opacity-100 transition-opacity interactive inline-block">Contact</motion.a></li>
+            <li>
+              <motion.a 
+                whileHover={{ x: 5 }} 
+                href="#" 
+                data-ccursor 
+                className="hover:opacity-100 transition-opacity interactive inline-block"
+              >
+                Home
+              </motion.a>
+            </li>
+            <li>
+              <motion.a 
+                whileHover={{ x: 5 }} 
+                href="#services" 
+                data-ccursor 
+                className="hover:opacity-100 transition-opacity interactive inline-block"
+              >
+                Services
+              </motion.a>
+            </li>
+            <li>
+              <motion.a 
+                whileHover={{ x: 5 }} 
+                href="#about" 
+                data-ccursor 
+                className="hover:opacity-100 transition-opacity interactive inline-block"
+              >
+                About
+              </motion.a>
+            </li>
+            <li>
+              <motion.a 
+                whileHover={{ x: 5 }} 
+                href="#contact" 
+                data-ccursor 
+                className="hover:opacity-100 transition-opacity interactive inline-block"
+              >
+                Contact
+              </motion.a>
+            </li>
           </ul>
         </div>
       </div>
 
       {/* Large Brand Name - Interactive (Below Links) */}
-      <div className="relative py-32 px-6">
+      <div className="relative py-32 px-6 overflow-hidden">
         <motion.a
           href="#contact"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          className="block cursor-pointer relative"
+          className="block cursor-pointer relative overflow-hidden"
           data-ccursor="lift"
           whileHover={{ scale: 1.02 }}
           transition={{ duration: 0.4 }}
@@ -1420,14 +1455,11 @@ const Footer = () => {
               scale: isHovered ? 0.95 : 1 
             }}
             transition={{ duration: 0.4 }}
-            className="text-center"
+            className="text-center overflow-hidden"
           >
-            <h2 className="text-[12vw] md:text-[10vw] lg:text-[8vw] font-bold leading-[0.9] tracking-tighter select-none">
-              Dr. Antoine Habib
+            <h2 className="text-[15vw] md:text-[10vw] lg:text-[8vw] font-bold leading-[0.9] tracking-tighter select-none">
+              Dr Antoine Habib
             </h2>
-            {/* <h2 className="text-[12vw] md:text-[10vw] lg:text-[8vw] font-bold leading-[0.9] tracking-tighter select-none">
-              Habib
-            </h2> */}
           </motion.div>
 
           {/* Contact Text on Hover */}
@@ -1437,9 +1469,9 @@ const Footer = () => {
               scale: isHovered ? 1 : 0.95 
             }}
             transition={{ duration: 0.4 }}
-            className="absolute inset-0 flex items-center justify-center"
+            className="absolute inset-0 flex items-center justify-center overflow-hidden"
           >
-            <h2 className="text-[12vw] md:text-[10vw] lg:text-[8vw] font-bold leading-none tracking-tighter">
+            <h2 className="text-[15vw] md:text-[10vw] lg:text-[8vw] font-bold leading-none tracking-tighter">
               Chat Now
             </h2>
           </motion.div>
@@ -1459,8 +1491,22 @@ const Footer = () => {
           Designed and Developed By MaximyzMedia
         </motion.a>
         <div className="flex gap-8">
-          <motion.a whileHover={{ y: -2 }} href="#" data-ccursor className="interactive">Privacy Policy</motion.a>
-          <motion.a whileHover={{ y: -2 }} href="#" data-ccursor className="interactive">Terms of Service</motion.a>
+          <motion.a 
+            whileHover={{ y: -2 }} 
+            href="#" 
+            data-ccursor 
+            className="interactive"
+          >
+            Privacy Policy
+          </motion.a>
+          <motion.a 
+            whileHover={{ y: -2 }} 
+            href="#" 
+            data-ccursor 
+            className="interactive"
+          >
+            Terms of Service
+          </motion.a>
         </div>
       </div>
     </footer>
