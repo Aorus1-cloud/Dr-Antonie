@@ -1384,14 +1384,14 @@ const Footer = () => {
             <li><motion.a whileHover={{ x: 5 }} href="#contact" data-ccursor className="hover:opacity-100 transition-opacity interactive inline-block">Contact</motion.a></li>
           </ul>
         </div>
-        <div>
+        {/* <div>
           <h4 className="text-xs uppercase tracking-widest font-bold mb-8">Newsletter</h4>
           <p className="text-xs opacity-50 mb-4">Stay updated with our latest news and offers.</p>
           <div className="flex border-b border-white/20 pb-2">
             <input type="email" placeholder="Email Address" className="bg-transparent outline-none text-sm w-full" />
             <motion.button whileHover={{ x: 5 }} data-ccursor className="interactive"><ArrowRight size={18} /></motion.button>
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="max-w-7xl mx-auto px-6 pt-10 flex flex-col md:flex-row justify-between items-center gap-6 opacity-30 text-[10px] uppercase tracking-[0.3em]">
         <span>© 2026 Dr. Antoine Habib. All rights reserved.</span>
