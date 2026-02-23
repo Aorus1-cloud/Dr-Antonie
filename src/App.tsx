@@ -81,7 +81,7 @@ const Navbar = () => {
         >
           <div className="bg-black px-4 py-2 rounded-sm">
             <img
-              src="public/Dr-antonie-logo.webp"
+              src="/Dr-antonie-logo.webp"
               alt="Dr. Antoine Habib"
               className={cn(
                 'w-auto object-contain transition-all duration-500',
@@ -1380,7 +1380,7 @@ const Footer = () => {
         <div className="col-span-2">
           <div className="flex items-center gap-3 mb-8">
             <img
-              src="public/Dr-antonie-logo.webp"
+              src="/Dr-antonie-logo.webp"
               alt="Dr. Antoine Logo"
               className="h-12 w-auto object-contain brightness-0 invert"
             />
