@@ -1381,7 +1381,7 @@ const Footer = () => {
           </ul>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto px-6 pt-10 flex flex-col md:flex-row justify-between items-center gap-6 opacity-30 text-[10px] uppercase tracking-[0.3em]">
+      <div className="max-w-7xl mx-auto px-6 pt-10 flex flex-col md:flex-row justify-between items-center gap-6 opacity-90 text-[10px] uppercase tracking-[0.3em]">
         <motion.a 
           href="https://maximyzmedia.com/" 
           target="_blank" 
