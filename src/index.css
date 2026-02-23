@@ -127,3 +127,666 @@ textarea:focus {
   display: inline-block;
   transform: skewX(5deg);
 }
+/* Google Reviews Stacked Card Effect - FIXED VERSION */
+.review-stack-wrapper {
+  perspective: 1000px;
+}
+
+.review-stack {
+  position: relative;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  transform-style: preserve-3d;
+}
+
+.review-stack:hover {
+  transform: rotate(3deg);
+}
+
+.review-stack:hover .review-card-before {
+  transform: translateY(-3%) rotate(-4deg);
+}
+
+.review-stack:hover .review-card-after {
+  transform: translateY(3%) rotate(4deg);
+}
+
+/* Main Card */
+.review-card {
+  position: relative;
+  background: white;
+  border: 4px solid;
+  border-radius: 16px;
+  padding: 24px;
+  min-height: 340px;
+  z-index: 3;
+  transition: transform 0.15s ease;
+}
+
+/* Background Cards - Using separate divs */
+.review-card-before,
+.review-card-after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border: 4px solid;
+  border-radius: 16px;
+  background: white;
+  transform-origin: center center;
+  transition: transform 0.2s ease;
+  pointer-events: none;
+}
+
+.review-card-before {
+  transform: translateY(-3%) rotate(-6deg);
+  z-index: 1;
+}
+
+.review-card-after {
+  transform: translateY(3%) rotate(6deg);
+  z-index: 2;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .review-card {
+    min-height: 300px;
+    padding: 20px;
+  }
+}
+
+/* ============================================
+   RESPONSIVE FIXES FOR MOBILE & TABLET
+   ============================================ */
+
+/* Base responsive adjustments */
+@media (max-width: 1024px) {
+  /* Reduce padding for tablets */
+  section {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
+  
+  .max-w-7xl {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Reduce padding for mobile */
+  section {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  
+  .max-w-7xl, .max-w-5xl, .max-w-4xl, .max-w-3xl {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Typography responsive */
+  h1 {
+    font-size: 2.5rem !important;
+    line-height: 1.1 !important;
+  }
+  
+  h2 {
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  h3 {
+    font-size: 1.25rem !important;
+  }
+  
+  .text-6xl, .text-5xl {
+    font-size: 2.5rem !important;
+  }
+  
+  .text-4xl {
+    font-size: 2rem !important;
+  }
+  
+  .text-3xl {
+    font-size: 1.75rem !important;
+  }
+  
+  .text-2xl {
+    font-size: 1.5rem !important;
+  }
+
+  /* Hero section */
+  .hero-title {
+    font-size: 3rem !important;
+  }
+
+  /* Grid layouts to single column */
+  .grid-cols-2,
+  .grid-cols-3,
+  .grid-cols-4,
+  .grid-cols-5 {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  }
+
+  .md\:grid-cols-2,
+  .md\:grid-cols-3,
+  .md\:grid-cols-4,
+  .lg\:grid-cols-2,
+  .lg\:grid-cols-4 {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  }
+
+  /* Buttons full width on mobile */
+  button, .button, a[class*="px-"] {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  /* Flex to column on mobile */
+  .flex-wrap {
+    flex-direction: column !important;
+  }
+
+  /* Gaps reduced on mobile */
+  .gap-8, .gap-12, .gap-16, .gap-20 {
+    gap: 1.5rem !important;
+  }
+
+  /* Hide on mobile */
+  .hidden {
+    display: none !important;
+  }
+
+  .md\:hidden {
+    display: block !important;
+  }
+
+  /* Padding adjustments */
+  .p-10, .p-12, .p-16 {
+    padding: 1.5rem !important;
+  }
+
+  .px-10, .px-12 {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+
+  .py-24, .py-32 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+}
+/* ============================================
+   NAVBAR RESPONSIVE FIXES
+   ============================================ */
+
+/* Base navbar styling */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+}
+
+/* Navbar container */
+nav > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Mobile specific fixes (< 768px) */
+@media (max-width: 768px) {
+  /* Force hide desktop nav items on mobile */
+  nav .hidden.md\:flex {
+    display: none !important;
+  }
+  
+  /* Show mobile menu button */
+  nav button.md\:hidden {
+    display: block !important;
+  }
+
+  /* Navbar padding adjustment */
+  nav {
+    /* display: flex; */
+    /* justify-content:end; */
+
+    
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+
+  /* Logo sizing */
+  nav img {
+    height: 2rem !important;
+  }
+
+  nav > div > a > div {
+    padding: 0.5rem 0.75rem !important;
+  }
+
+  /* Mobile menu dropdown */
+  nav .absolute.top-full {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: white;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    z-index: 40;
+  }
+
+  /* Mobile menu links */
+  nav .absolute.top-full a {
+    display: block;
+    width: 100%;
+    font-size: 1.125rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  /* Mobile menu button */
+  nav .absolute.top-full button {
+    width: 100%;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 0.5rem;
+  }
+
+  /* Ensure proper z-index hierarchy */
+  nav button[class*="md:hidden"] {
+    z-index: 51;
+    position: relative;
+  }
+}
+
+/* Tablet specific (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* Reduce spacing between nav items */
+  nav .hidden.md\:flex.items-center.gap-8 {
+    gap: 1.5rem !important;
+  }
+
+  nav .hidden.md\:flex.items-center.gap-6 {
+    gap: 1rem !important;
+  }
+
+  /* Smaller text on tablet */
+  nav a {
+    font-size: 0.75rem !important;
+  }
+
+  /* Smaller button on tablet */
+  nav button {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    padding-top: 0.625rem !important;
+    padding-bottom: 0.625rem !important;
+    font-size: 0.625rem !important;
+  }
+
+  /* Smaller logo on tablet */
+  nav img {
+    height: 2.25rem !important;
+  }
+}
+
+/* Desktop (> 1024px) */
+@media (min-width: 1025px) {
+  /* Ensure mobile button is hidden */
+  nav button.md\:hidden {
+    display: none !important;
+  }
+
+  /* Ensure desktop nav is visible */
+  nav .hidden.md\:flex {
+    display: flex !important;
+  }
+}
+
+/* Fix for mobile menu animation */
+@media (max-width: 768px) {
+  nav .absolute.top-full {
+    animation: slideDown 0.3s ease-out;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Prevent body scroll when mobile menu is open */
+body.menu-open {
+  overflow: hidden;
+}
+
+/* Touch target size for mobile */
+@media (max-width: 768px) {
+  nav a,
+  nav button {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* ============================================
+   HERO SECTION RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 3rem !important;
+    margin-bottom: 2rem !important;
+  }
+
+  .hero-sub {
+    font-size: 1rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .hero-image {
+    order: -1;
+    margin-bottom: 2rem;
+  }
+
+  section[class*="min-h-screen"] {
+    min-height: auto !important;
+    padding-top: 5rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  /* Hero floating card - hide on mobile */
+  .hero-image .absolute.-bottom-12 {
+    display: none !important;
+  }
+}
+
+/* ============================================
+   STATS SECTION RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+  /* Stats grid to 2 columns on mobile */
+  .grid.grid-cols-2.md\:grid-cols-5 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  /* Stat numbers smaller on mobile */
+  .text-5xl {
+    font-size: 2rem !important;
+  }
+
+  .text-25vw {
+    font-size: 15vw !important;
+  }
+}
+
+/* ============================================
+   ACHIEVEMENT/CAROUSEL RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+  .achievement-swiper {
+    height: 400px !important;
+  }
+
+  .swiper-button-next-custom,
+  .swiper-button-prev-custom {
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+  }
+
+  .swiper-button-next-custom svg,
+  .swiper-button-prev-custom svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+}
+
+/* ============================================
+   PROCESS/TIMELINE SECTION RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+  .lg\:grid-cols-2 {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  }
+
+  /* Timeline line hide on mobile */
+  .absolute.left-5.top-10 {
+    display: none !important;
+  }
+
+  /* Step padding reduced */
+  .dental-step-0,
+  .dental-step-1,
+  .dental-step-2,
+  .dental-step-3 {
+    padding-left: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  /* Sticky positioning off on mobile */
+  div[style*="position: sticky"] {
+    position: relative !important;
+    top: auto !important;
+  }
+}
+
+/* ============================================
+   GOOGLE REVIEWS CARD STACK RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+  .review-stack-wrapper {
+    margin-bottom: 2rem;
+  }
+
+  .review-card,
+  .review-card-before,
+  .review-card-after {
+    min-height: 280px !important;
+    padding: 1.25rem !important;
+  }
+
+  /* Reduce rotation on mobile */
+  .review-stack:hover {
+    transform: rotate(1deg) !important;
+  }
+
+  .review-stack:hover .review-card-before {
+    transform: translateY(-2%) rotate(-2deg) !important;
+  }
+
+  .review-stack:hover .review-card-after {
+    transform: translateY(2%) rotate(2deg) !important;
+  }
+
+  /* 2 columns on tablet */
+  .grid.md\:grid-cols-2.lg\:grid-cols-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 2rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Single column on mobile */
+  .grid.md\:grid-cols-2.lg\:grid-cols-4 {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  }
+
+  .review-card {
+    font-size: 0.875rem !important;
+  }
+}
+
+/* ============================================
+   FAQ SECTION RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+  .grid.lg\:grid-cols-2 {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  }
+
+  .review-card,
+  .faq-card {
+    padding: 1rem !important;
+  }
+
+  button span {
+    font-size: 0.9rem !important;
+  }
+}
+
+/* ============================================
+   CONTACT FORM RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+  /* Form to single column */
+  form .grid.grid-cols-2 {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  }
+
+  /* Contact section single column */
+  #contact .grid.md\:grid-cols-2 {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  }
+}
+
+/* ============================================
+   VIDEO TESTIMONIALS RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+  .grid.md\:grid-cols-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid.md\:grid-cols-3 {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  }
+
+  .aspect-\[9\/16\] {
+    aspect-ratio: 3 / 4 !important;
+  }
+}
+
+/* ============================================
+   FOOTER RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+  footer .grid.md\:grid-cols-4 {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  }
+
+  footer .col-span-2 {
+    grid-column: span 1 / span 1 !important;
+  }
+
+  footer .flex.md\:flex-row {
+    flex-direction: column !important;
+    text-align: center;
+  }
+}
+
+/* ============================================
+   LOGO MARQUEE RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+  .text-2xl {
+    font-size: 1.25rem !important;
+  }
+
+  div[class*="px-16"] {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+}
+
+/* ============================================
+   WHY CHOOSE US SECTION RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+  .grid.md\:grid-cols-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid.md\:grid-cols-4 {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  }
+}
+
+/* ============================================
+   MISC RESPONSIVE UTILITIES
+   ============================================ */
+@media (max-width: 768px) {
+  /* Images full width on mobile */
+  img[class*="aspect-"] {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Remove negative margins on mobile */
+  [class*="-bottom-"],
+  [class*="-top-"],
+  [class*="-left-"],
+  [class*="-right-"] {
+    top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    position: relative !important;
+  }
+
+  /* Overflow hidden for mobile */
+  body {
+    overflow-x: hidden !important;
+  }
+
+  /* Touch target size */
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* ============================================
+   TABLET SPECIFIC (768px - 1024px)
+   ============================================ */
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* 2 columns for most grids */
+  .grid-cols-3,
+  .grid-cols-4,
+  .grid-cols-5,
+  .md\:grid-cols-3,
+  .md\:grid-cols-4,
+  .md\:grid-cols-5 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  /* Text sizes slightly smaller */
+  .text-6xl {
+    font-size: 3.5rem !important;
+  }
+
+  .text-5xl {
+    font-size: 3rem !important;
+  }
+
+  .text-4xl {
+    font-size: 2.5rem !important;
+  }
+}
